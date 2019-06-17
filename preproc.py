@@ -3,7 +3,7 @@ import numpy as np
 import pickle
 import sys
 
-sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.xfeatures2d.SIFT_create(200)
 def getAffMat(I1, I2):
     I1 = cv2.cvtColor(I1, cv2.COLOR_BGR2GRAY)
     I2 = cv2.cvtColor(I2, cv2.COLOR_BGR2GRAY)
@@ -15,12 +15,12 @@ def getAffMat(I1, I2):
     # Finding good matches using ratio testing
     bf = cv2.BFMatcher()
     matches = bf.knnMatch(desc1, desc2, k=2)
-
+    print('Before filtering->', len(matches))
     good = []
     for m,n in matches:
         if m.distance < 0.7*n.distance:
             good.append(m)
-
+    print('After filtering->', len(good))
     pts_src = []
     pts_dst = []
     for i in range(len(good)):
@@ -34,23 +34,23 @@ def getAffMat(I1, I2):
     return cv2.estimateRigidTransform(pts_src, pts_dst, fullAffine=False)
 
 v = cv2.VideoCapture(sys.argv[1])
-
+n_frames = int(v.get(cv2.CAP_PROP_FRAME_COUNT))
 # Generating the Xdata and Ydata
-transforms = [[], []]
+transforms = [[], [], [], []]
 count = 0
 while v.isOpened():
     ret, frame = v.read()
     if ret == True:
-    	if count > 0:
-    		transMat = getAffMat(prev, frame)
-    		transforms[0].append(transMat[0][2])
-    		transforms[1].append(transMat[1][2])
-    		
-    	count += 1
-    	prev = frame
-    	print(count)
-    	if count == 1000:
-    		break
+        if count > 0:
+            transMat = getAffMat(prev, frame)
+            transforms[0].append(transMat[0][2])
+            transforms[1].append(transMat[1][2])
+            transforms[2].append(np.arctan2(transMat[1][0], transMat[0][0]))
+            transforms[3].append(np.sqrt(transMat[1][0]**2 + transMat[0][0]**2))
+
+        count += 1
+        prev = frame
+        print((count/n_frames)*100, '%')
     else:
     	break
 
