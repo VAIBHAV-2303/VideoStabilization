@@ -28,7 +28,13 @@ bar@foo:~/VideoStabilization$ python3 src/stabilize.py <Displacement_threshold_p
 bar@foo:~/VideoStabilization$ python3 src/generate.py <video_file_path> <Displacement_threshold_pixels>
 ```
 
-Note: This will create some temporary pickle files, please ignore them.
+OR
+
+```bash
+bar@foo:~/VideoStabilization$ script.sh <video_file_path> <Displacement_threshold_pixels>
+```
+
+Note: This will create 3 temporary/intermediate pickle files, please ignore them.
 
 ## Built With
 
