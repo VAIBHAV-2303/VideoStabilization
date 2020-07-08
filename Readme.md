@@ -1,4 +1,4 @@
-# VideoStabilization 
+# VideoStabilization
 
 ## Description
 
@@ -20,12 +20,15 @@ Finally a cropped region of the video is outputted where the cropped region box 
 
 ## How To
 
-* Run the webapp: 	
-```console
-	bar@foo:~/VideoStabilization$ python3 preproc.py <video_file>
-	bar@foo:~/VideoStabilization$ python3 stabilize.py
-	bar@foo:~/VideoStabilization$ python3 generate.py <video_file>	
+* Run:
+
+```bash
+bar@foo:~/VideoStabilization$ python3 src/preproc.py <video_file_path>
+bar@foo:~/VideoStabilization$ python3 src/stabilize.py <Displacement_threshold_pixels>
+bar@foo:~/VideoStabilization$ python3 src/generate.py <video_file_path> <Displacement_threshold_pixels>
 ```
+
+Note: This will create some temporary pickle files, please ignore them.
 
 ## Built With
 
