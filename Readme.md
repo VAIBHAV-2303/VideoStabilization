@@ -31,7 +31,7 @@ bar@foo:~/VideoStabilization$ python3 src/generate.py <video_file_path> <Displac
 OR
 
 ```bash
-bar@foo:~/VideoStabilization$ script.sh <video_file_path> <Displacement_threshold_pixels>
+bar@foo:~/VideoStabilization$ bash script.sh <video_file_path> <Displacement_threshold_pixels>
 ```
 
 Note: This will create 3 temporary/intermediate pickle files, please ignore them.
