@@ -32,7 +32,7 @@ def getAffMat(I1, I2):
     pts_dst = np.array(pts_dst).astype(np.float32)
 
     # Computing affine matrix using the best matches
-    return cv2.estimateRigidTransform(pts_src, pts_dst, fullAffine=False)
+    return cv2.estimateAffinePartial2D(pts_src, pts_dst)
 
 v = cv2.VideoCapture(sys.argv[1])
 n_frames = int(v.get(cv2.CAP_PROP_FRAME_COUNT))
