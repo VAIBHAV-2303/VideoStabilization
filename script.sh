@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Preprocessing"
 python3 src/preproc.py $1
 
